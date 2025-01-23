@@ -1,9 +1,9 @@
-CXX_FLAGS += -std=c++11 # Adjust if the library requires a higher standard
+CXX_FLAGS += -std=c++11 -Iinclude/json-schema-validator/include
 
 # Use CMake to build the library
 $(SHLIB_OBJECTS):
     @mkdir -p build
-    (cd build; cmake ..)
+    (cd build; cmake ../include/json-schema-validator)
     (cd build; make)
 
 # Link to the built library
