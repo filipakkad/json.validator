@@ -1,7 +1,7 @@
 Package: json.validator
 Type: Package
 Title: Concise Summary of What the Package Does
-Version: 0.2.0
+Version: 0.3.0
 Date: 2025-01-23
 Authors@R: person("Filip", "Akkad", role = c("aut", "cre"), email = "me@filipakkad.com")
 Description: A fast and modern R package for JSON validation, wrapping the powerful pboettch/json-schema-validator for seamless integration..

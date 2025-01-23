@@ -1,7 +1,7 @@
 CXX_FLAGS += -std=c++11 -Iinclude/json-schema-validator/include
 
 # Link to the built library
-PKG_LIBS += -L./build/lib -lnlohmann_json_schema_validator
+# PKG_LIBS += -L./build/lib -lnlohmann_json_schema_validator
 
 # Include directory for header files
 PKG_CPPFLAGS = -I../src/include
