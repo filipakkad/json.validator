@@ -10,19 +10,22 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _json_validator_rcpp_hello_world() {
+// validate_json_schema
+bool validate_json_schema(Rcpp::StringVector json_str, Rcpp::StringVector schema_str, bool throw_error);
+RcppExport SEXP _json_validator_validate_json_schema(SEXP json_strSEXP, SEXP schema_strSEXP, SEXP throw_errorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
+    Rcpp::traits::input_parameter< Rcpp::StringVector >::type json_str(json_strSEXP);
+    Rcpp::traits::input_parameter< Rcpp::StringVector >::type schema_str(schema_strSEXP);
+    Rcpp::traits::input_parameter< bool >::type throw_error(throw_errorSEXP);
+    rcpp_result_gen = Rcpp::wrap(validate_json_schema(json_str, schema_str, throw_error));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_json_validator_rcpp_hello_world", (DL_FUNC) &_json_validator_rcpp_hello_world, 0},
+    {"_json_validator_validate_json_schema", (DL_FUNC) &_json_validator_validate_json_schema, 3},
     {NULL, NULL, 0}
 };
 

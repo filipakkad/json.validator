@@ -1,12 +1,15 @@
 Package: json.validator
 Type: Package
 Title: Concise Summary of What the Package Does
-Version: 1.0
+Version: 0.1.0
 Date: 2025-01-23
 Authors@R: person("Filip", "Akkad", role = c("aut", "cre"), email = "me@filipakkad.com")
-Description: More about what it does (maybe more than one line).
+Description: A fast and modern R package for JSON validation, wrapping the powerful pboettch/json-schema-validator for seamless integration..
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.14)
 LinkingTo: Rcpp
 SystemRequirements: C++17 or later, cmake, make, git, nlohmann/json
-
+RoxygenNote: 7.3.2
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
