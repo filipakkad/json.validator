@@ -8,7 +8,7 @@ Description: A fast and modern R package for JSON validation, wrapping the power
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.14)
 LinkingTo: Rcpp
-SystemRequirements: C++17 or later, cmake, make, git, nlohmann/json
+SystemRequirements: C++17 or later, cmake, make, nlohmann/json
 RoxygenNote: 7.3.2
 Suggests:
     testthat (>= 3.0.0)
