@@ -1,0 +1,2 @@
+PKG_CPPFLAGS = -I$(PWD)/inst/include
+PKG_LIBS = -L$(PWD)/inst/lib -lnlohmann_json_schema_validator
