@@ -2,9 +2,9 @@ CXX_FLAGS += -std=c++11 # Adjust if the library requires a higher standard
 
 # Use CMake to build the library
 $(SHLIB_OBJECTS):
-        @mkdir -p build
-        (cd build; cmake ..)
-        (cd build; make)
+    @mkdir -p build
+    (cd build; cmake ..)
+    (cd build; make)
 
 # Link to the built library
 PKG_LIBS += -L./build/lib -lnlohmann_json_schema_validator
