@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 #include <nlohmann/json.hpp>
-#include "nlohmann/json-schema.hpp"
+#include "include/nhlomann/json-schema.hpp"
 
 // [[Rcpp::export]]
 bool validate_json_schema(
