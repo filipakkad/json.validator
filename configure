@@ -6,6 +6,6 @@ cd src/include/json-schema-validator
 mkdir build
 cd build
 
-cmake ..
+cmake .. -DCMAKE_INSTALL_PREFIX=./src/lib ..
 make
 make install

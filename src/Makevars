@@ -1,2 +1,2 @@
-PKG_CPPFLAGS += -I./include -I./include/nlohmann
-PKG_LIBS +=
+PKG_CPPFLAGS += -I./src/lib/include
+PKG_LIBS += -L./src/lib/lib -ljson-schema-validator
