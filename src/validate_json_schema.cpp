@@ -1,6 +1,9 @@
 #include <Rcpp.h>
 #include <nlohmann/json.hpp>
-#include <nlohmann/json-schema.hpp>
+#include <valijson/adapters/nlohmann_json_adapter.hpp>
+#include <valijson/schema.hpp>
+#include <valijson/schema_parser.hpp>
+#include <valijson/validator.hpp>
 
 // [[Rcpp::export]]
 bool validate_json_schema(
@@ -30,9 +33,30 @@ bool validate_json_schema(
     nlohmann::json json_obj = nlohmann::json::parse(json_string);
     nlohmann::json schema_obj = nlohmann::json::parse(schema_string);
 
-    nlohmann::json_schema::json_validator validator;
-    validator.set_root_schema(schema_obj);
-    validator.validate(json_obj);
+    // Create Valijson schema
+    valijson::Schema schema;
+    valijson::SchemaParser parser;
+    valijson::adapters::NlohmannJsonAdapter schemaAdapter(schema_obj);
+    parser.populateSchema(schemaAdapter, schema);
+
+    // Validate JSON against schema
+    valijson::Validator validator;
+    valijson::adapters::NlohmannJsonAdapter targetAdapter(json_obj);
+
+    valijson::ValidationResults results;
+    if (!validator.validate(schema, targetAdapter, &results)) {
+      if (throw_error) {
+        std::string error_message = "Validation failed. Errors:\n";
+        valijson::ValidationResults::Error error;
+        unsigned int error_num = 1;
+        while (results.popError(error)) {
+          error_message += "  " + std::to_string(error_num) + ": " + error.description + "\n";
+          ++error_num;
+        }
+        Rcpp::stop(error_message);
+      }
+      return false;
+    }
 
     return true;
   } catch (const std::exception &e) {
