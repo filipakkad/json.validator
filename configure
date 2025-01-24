@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Set paths
+PACKAGE_DIR=$(pwd)
+LIBS_DIR="${PACKAGE_DIR}/libs"
+SRC_DIR="${PACKAGE_DIR}/src"
+
+# Create libs directory if it doesn't exist
+mkdir -p ${LIBS_DIR}
+
+# Detect system platform
+UNAME=$(uname -s)
+
+# Define URLs for json-schema-validator source
+REPO_URL="https://github.com/pboettch/json-schema-validator.git"
+CLONE_DIR="${SRC_DIR}/json-schema-validator"
+
+echo "Building nlohmann-json-schema-validator for platform: ${UNAME}"
+
+# Download and build the library
+if [ ! -d ${CLONE_DIR} ]; then
+  echo "Cloning json-schema-validator repository..."
+  git clone ${REPO_URL} ${CLONE_DIR}
+fi
+
+# Build the library
+cd ${CLONE_DIR}
+cmake -S . -B build -DBUILD_SHARED_LIBS=ON
+cmake --build build
+
+# Copy shared library to libs/ directory
+if [ "$UNAME" = "Darwin" ]; then
+  echo "Copying macOS dylib to libs/"
+  cp build/libnlohmann_json_schema_validator.dylib ${LIBS_DIR}/
+elif [ "$UNAME" = "Linux" ]; then
+  echo "Copying Linux so file to libs/"
+  cp build/libnlohmann_json_schema_validator.so ${LIBS_DIR}/
+else
+  echo "Unsupported platform: ${UNAME}"
+  exit 1
+fi
+
+# Return to the package root
+cd ${PACKAGE_DIR}
+
+# Make the library usable by Makevars
+echo "PKG_LIBS += -L${LIBS_DIR} -lnlohmann_json_schema_validator" > src/Makevars
+echo "Library built and linked successfully."
+exit 0
