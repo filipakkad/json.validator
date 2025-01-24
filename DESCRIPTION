@@ -8,7 +8,9 @@ Description: A fast and modern R package for JSON validation, wrapping the power
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.14)
 LinkingTo: Rcpp
-SystemRequirements: C++11 or later, cmake, make, nlohmann/json, valijson
+SystemRequirements: C++11
+    On Debian/Ubuntu: libvalijson-dev, nlohmann-json3-dev
+    On macOS with Homebrew: valijson, nlohmann-json
 RoxygenNote: 7.3.2
 Suggests:
     testthat (>= 3.0.0)
